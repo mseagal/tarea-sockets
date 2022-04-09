@@ -8,10 +8,16 @@ var conn = socket.on('connect', function () {
     console.log("Escriba un mensaje: ");
     var stdin = process.openStdin();
     stdin.addListener("data", function(d) {
-            socket.emit('client:message', d.toString().trim());
+      socket.emit('commands', d.toString().trim());
       });
-});
 
-if(!conn.connected){
-      console.log('sin conexión con el servidor');
-}
+      socket.on('login:resp', function (data) {
+            console.log(data);
+      })
+
+      socket.on('informe:resp', function (data) {
+            console.log(data);
+      })
+
+
+});
